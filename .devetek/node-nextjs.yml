@@ -16,6 +16,7 @@ build:
           cmd:
             - node -v
             - npm install
+            - npm run build
 
 run:
   name: nodejs-nextjs
