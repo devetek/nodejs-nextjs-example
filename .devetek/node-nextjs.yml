@@ -20,5 +20,5 @@ build:
 run:
   name: nodejs-nextjs
   description: My NextJS Youtube Demo dPanel Deployment
-  command: pm run start
+  command: npm run start
   port: 3001
