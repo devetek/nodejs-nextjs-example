@@ -28,6 +28,8 @@ build:
       environment:
         - key: BUILD_DIR
           value: .next-unstable
+        - key: BUILD_ENV
+          value: development
 
 run:
   name: nodejs-nextjs
