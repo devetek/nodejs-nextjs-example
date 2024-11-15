@@ -6,6 +6,7 @@ setup:
     name: nodejs
     version: v18.19.0
 
+# documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
 build:
   target:
     ## -> Build app non docker (tar.gz)
@@ -17,9 +18,17 @@ build:
             - node -v
             - npm install
             - npm run build
+            - cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
+        - name: "create application artifact"
+          archive:
+            - ./dist
+            - ./node_modules
 
 run:
   name: nodejs-nextjs
-  description: My NextJS Youtube Demo dPanel Deployment
-  command: npm run start
-  port: 3001
+  description: NextJS Youtube demo dPanel deployment
+  command: node .next/standalone/server.js
+  port: 3002
+  environment:
+    - key: PORT
+      value: 3002
