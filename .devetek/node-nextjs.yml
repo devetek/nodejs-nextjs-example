@@ -15,7 +15,7 @@ build:
       workdir: .
       steps:
         - name: "build application"
-          cmd:
+          command:
             - node -v
             - npm install
             - npm run build
