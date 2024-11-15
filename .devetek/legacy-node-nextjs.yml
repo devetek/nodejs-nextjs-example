@@ -25,7 +25,7 @@ build:
 
 run:
   name: legacy-node-nextjs
-  description: NextJS Youtube demo dPanel deployment
+  description: NextJS Legacy Build youtube demo dPanel deployment
   command: node .next/standalone/server.js
   # reload: node .next/standalone/server.js
   port: 3003
