@@ -33,6 +33,7 @@ run:
   name: nodejs-nextjs
   description: NextJS Youtube demo dPanel deployment
   command: node .next/standalone/server.js
+  # reload: node .next/standalone/server.js
   port: 3002
   environment:
     - key: PORT
