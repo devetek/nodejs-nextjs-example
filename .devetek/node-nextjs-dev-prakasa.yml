@@ -19,14 +19,15 @@ build:
             - npm install
             - npm run build
             - cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/.next/
-            - rm -rf .next | echo "folder .next not exist"
-            - mv ${BUILD_DIR} .next
+            - rm -rf .next | echo "folder .next not exist" # later can delete, cover legacy build command
+            - cat version | xargs rm -rf # remove previous version
+            - echo ${BUILD_DIR} > version # create new version
         - name: "create application artifact"
           archive:
             - ./.next
       environment:
         - key: BUILD_DIR
-          value: .next-unstable
+          value: $(git rev-parse --short HEAD)
         - key: BUILD_ENV
           value: development
 

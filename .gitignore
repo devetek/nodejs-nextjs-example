@@ -38,3 +38,6 @@ next-env.d.ts
 
 # HC check during CD
 body
+
+# VPS trick for zero downtime deployment
+version
