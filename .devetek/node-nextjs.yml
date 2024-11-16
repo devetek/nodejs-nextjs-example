@@ -35,7 +35,7 @@ run:
   description: NextJS Youtube demo dPanel deployment
   command: node .next/standalone/server.js
   # reload: node .next/standalone/server.js
-  port: 3002
+  port: 4002
   environment:
     - key: PORT
-      value: 3002
+      value: 4002
