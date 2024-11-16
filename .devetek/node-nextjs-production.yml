@@ -1,0 +1,41 @@
+# Cloud Devetek Standard Definition v0.0.1-alpha.0 Go Example
+version: v0.0.1-alpha.0
+
+setup:
+  language:
+    name: nodejs
+    version: v18.19.0
+
+# documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
+# Next.js VPS Zero Downtime: https://stackoverflow.com/questions/73322929/zero-downtime-deployment-with-next-js
+build:
+  target:
+    ## -> Build app non docker (tar.gz)
+    machine: # exec sequentially
+      workdir: .
+      steps:
+        - name: "build application"
+          command:
+            - npm install
+            - npm run build
+            - cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/.next/
+            - rm -rf .next | echo "folder .next not exist"
+            - mv ${BUILD_DIR} .next
+        - name: "create application artifact"
+          archive:
+            - ./.next
+      environment:
+        - key: BUILD_DIR
+          value: .next-unstable
+        - key: BUILD_ENV
+          value: development
+
+run:
+  name: nodejs-nextjs
+  description: NextJS Youtube demo dPanel deployment
+  command: node .next/standalone/server.js
+  # reload: node .next/standalone/server.js
+  port: 3002
+  environment:
+    - key: PORT
+      value: 3002
