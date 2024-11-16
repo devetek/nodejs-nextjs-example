@@ -16,6 +16,7 @@ build:
       steps:
         - name: "build application"
           command:
+            - test "$(git rev-parse --short HEAD)" = "$(cat version)" && (echo "no changes detected" && exit 0) || echo "Building...."
             - npm install
             - npm run build
             - cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/.next/
