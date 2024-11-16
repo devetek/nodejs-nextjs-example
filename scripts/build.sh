@@ -11,7 +11,7 @@ if [[ "$(git rev-parse --short HEAD)" != "$(cat version)" ]]; then
     npm install # install all dependencies
     # start: build next.js, follow documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
     npm run build
-    cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/.next/
+    cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/
     # end: build next.js
     rm -rf .next | echo "folder .next not exist" # delete previous version, pipe to echo to prevent error
     cat version | xargs rm -rf # remove previous version, will never error even if version file does not exist
