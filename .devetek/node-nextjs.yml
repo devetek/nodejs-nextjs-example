@@ -16,12 +16,11 @@ build:
       steps:
         - name: "build application"
           command:
-            - node -v
             - npm install
             - npm run build
             - cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/.next/
-            - rm .next | echo "folder .next not exist"
-            - mv ${BUILD_DIR} .next 
+            - rm -rf .next | echo "folder .next not exist"
+            - mv ${BUILD_DIR} .next
         - name: "create application artifact"
           archive:
             - ./.next

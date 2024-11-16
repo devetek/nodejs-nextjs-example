@@ -16,7 +16,6 @@ build:
       steps:
         - name: "build application"
           command:
-            - node -v
             - npm install
             - npm run build 
         - name: "create application artifact"
