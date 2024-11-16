@@ -7,7 +7,6 @@ setup:
     version: v18.19.0
 
 # documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
-# Next.js VPS Zero Downtime: https://stackoverflow.com/questions/73322929/zero-downtime-deployment-with-next-js
 build:
   target:
     ## -> Build app non docker (tar.gz)
@@ -16,17 +15,13 @@ build:
       steps:
         - name: "build application"
           command:
-            - npm install
-            - npm run build
-            - cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/.next/
-            - rm -rf .next | echo "folder .next not exist"
-            - mv ${BUILD_DIR} .next
+            - ./scripts/build.sh # move to bash, easy implementation
         - name: "create application artifact"
           archive:
             - ./.next
       environment:
         - key: BUILD_DIR
-          value: .next-unstable
+          value: $(git rev-parse --short HEAD)
         - key: BUILD_ENV
           value: development
 

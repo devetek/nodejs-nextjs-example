@@ -27,7 +27,7 @@ build:
 
 run:
   name: nodejs-nextjs
-  description: NextJS Youtube demo dPanel deployment
+  description: NextJS Youtube demo dPanel deployment development
   command: node .next/standalone/server.js
   # reload: node .next/standalone/server.js
   port: 4000
