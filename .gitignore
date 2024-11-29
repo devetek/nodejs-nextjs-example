@@ -42,3 +42,4 @@ body
 # VPS trick for zero downtime deployment
 version
 build-dev.sh
+.build-*

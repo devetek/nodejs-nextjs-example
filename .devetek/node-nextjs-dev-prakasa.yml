@@ -21,7 +21,7 @@ build:
             - ./.next
       environment:
         - key: BUILD_DIR
-          value: $(git rev-parse --short HEAD)
+          value: .build-$(git rev-parse --short HEAD)
         - key: BUILD_ENV
           value: development
 
