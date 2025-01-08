@@ -18,7 +18,8 @@ if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
     npm run build || exit 2
 
     echo ">>>>> Copying static and public folders <<<<<"
-    cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/
+    cp -r public ${BUILD_DIR}/standalone/
+    cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/
 
     echo ">>>>> Create Version Control <<<<<"
     cat version | xargs rm -rf
