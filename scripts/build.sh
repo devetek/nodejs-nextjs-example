@@ -6,15 +6,26 @@
 
 # Later, we’ll discuss how dPanel implements security in your workflows.
 
+CURRENT_VERSION=$(cat version)
+
 # Skip build if no changes version
-if [[ "$(git rev-parse --short HEAD)" != "$(cat version)" ]]; then
+if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
+    echo ">>>>> Installing dependencies <<<<<"
     npm install # install all dependencies
+
     # start: build next.js, follow documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
-    npm run build
+    echo ">>>>> Running Build <<<<<"
+    npm run build || exit 2
+
+    echo ">>>>> Copying static and public folders <<<<<"
     cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/
-    # end: build next.js
-    rm -rf .next | echo "folder .next not exist" # delete previous version, pipe to echo to prevent error
+
+    echo ">>>>> Create Version Control <<<<<"
     cat version | xargs rm -rf # remove previous version, will never error even if version file does not exist
     echo ${BUILD_DIR} > version # create new version
     cp -rf ${BUILD_DIR} .next # create runtime env (systemd), copy to .next folder
+fi
+
+if [[ "${BUILD_DIR}" == "${CURRENT_VERSION}" ]]; then
+    echo "Skip build, no changes detected!"
 fi
