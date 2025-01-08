@@ -11,7 +11,7 @@ CURRENT_VERSION=$(cat version)
 # Skip build if no changes version
 if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
     echo ">>>>> Installing dependencies <<<<<"
-    npm install # install all dependencies
+    npm install
 
     # start: build next.js, follow documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
     echo ">>>>> Running Build <<<<<"
@@ -21,9 +21,13 @@ if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
     cp -r public ${BUILD_DIR}/standalone/ && cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/
 
     echo ">>>>> Create Version Control <<<<<"
-    cat version | xargs rm -rf # remove previous version, will never error even if version file does not exist
-    echo ${BUILD_DIR} > version # create new version
-    cp -rf ${BUILD_DIR} .next # create runtime env (systemd), copy to .next folder
+    cat version | xargs rm -rf
+    echo ${BUILD_DIR} > version
+    if [ -d ".next" ]; then
+        cp -rf ${BUILD_DIR}/* .next
+    else
+        cp -rf ${BUILD_DIR} .next
+    fi
 fi
 
 if [[ "${BUILD_DIR}" == "${CURRENT_VERSION}" ]]; then
