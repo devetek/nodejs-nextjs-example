@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# You must be concerned about security, and your statement is valid—it aims to make the system flexible for all users. However, since this is still an alpha version, the priority is to complete the main business flow. Security is relatively easy to implement, but we need to think beyond the business logic itself. We should focus on how to protect the business from vulnerabilities.
+# You must be concerned about security, and your statement is valid—it aims to make the system secure for all users. However, since this is still an alpha version, the priority is to complete the main business flow. Security is relatively easy to implement, but we need to think beyond the business logic itself. We should focus on how to protect the business from vulnerabilities.
 
 # If you're aiming to create a robust, flexible, and scalable platform, security (like a guard, or satpam) should be placed outside the core business processes. Based on this, the easiest way to implement security is by securing the environment where the business operates (i.e., creating a secure environment for business operations without interfering with the business process itself).
 
