@@ -11,15 +11,15 @@ CURRENT_VERSION=$(cat version)
 # Skip build if no changes version
 if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
     echo ">>>>> Installing dependencies <<<<<"
-    npm install
+    npm install || exit 2
 
     # start: build next.js, follow documentation https://nextjs.org/docs/app/api-reference/next-config-js/output
     echo ">>>>> Running Build <<<<<"
     npm run build || exit 2
 
     echo ">>>>> Copying static and public folders <<<<<"
-    cp -r public ${BUILD_DIR}/standalone/
-    cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/
+    cp -r public ${BUILD_DIR}/standalone/ || exit 2
+    cp -r ${BUILD_DIR}/static ${BUILD_DIR}/standalone/${BUILD_DIR}/ || exit 2
 
     echo ">>>>> Create Version Control <<<<<"
     cat version | xargs rm -rf
