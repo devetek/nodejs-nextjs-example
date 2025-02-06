@@ -29,19 +29,16 @@ if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
     else
         cp -rf ${BUILD_DIR} .next
     fi
+
+
+    echo ">>>>> Cleanup previous version <<<<<"
+    # Refetch current version
+    NEXT_VERSION=$(cat version)
+
+    # Clean up previous / unused build version. Keep current run and next version (current deployment)
+    find ".next/standalone" -name ".build-*" -not -name "${CURRENT_VERSION}" -not -name "${NEXT_VERSION}" -prune -exec rm -rf {} \;
 fi
 
 if [[ "${BUILD_DIR}" == "${CURRENT_VERSION}" ]]; then
     echo "Skip build, no changes detected!"
-fi
-
-# 
-# Prev Build Clean Up
-# 
-if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
-    # refetch current version
-    CURRENT_VERSION=$(cat version)
-
-    # clean up previous / unused build version
-    find ".next/standalone" -name ".build-*" -not -name "${CURRENT_VERSION}" -prune -exec rm -rf {} \;
 fi
