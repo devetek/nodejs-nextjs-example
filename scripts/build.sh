@@ -34,3 +34,14 @@ fi
 if [[ "${BUILD_DIR}" == "${CURRENT_VERSION}" ]]; then
     echo "Skip build, no changes detected!"
 fi
+
+# 
+# Prev Build Clean Up
+# 
+# 
+
+# Refetch current version
+CURRENT_VERSION=$(cat version)
+
+# clean up previous / unused build version
+find ".next/standalone" -name ".build-*" -not -name "${CURRENT_VERSION}*" -prune -exec rm -rf {} \;
