@@ -38,10 +38,10 @@ fi
 # 
 # Prev Build Clean Up
 # 
-# 
+if [[ "${BUILD_DIR}" != "${CURRENT_VERSION}" ]]; then
+    # refetch current version
+    CURRENT_VERSION=$(cat version)
 
-# refetch current version
-CURRENT_VERSION=$(cat version)
-
-# clean up previous / unused build version
-find ".next/standalone" -name ".build-*" -not -name "${CURRENT_VERSION}*" -prune -exec rm -rf {} \;
+    # clean up previous / unused build version
+    find ".next/standalone" -name ".build-*" -not -name "${CURRENT_VERSION}" -prune -exec rm -rf {} \;
+fi
