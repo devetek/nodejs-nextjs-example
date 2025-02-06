@@ -40,7 +40,7 @@ fi
 # 
 # 
 
-# Refetch current version
+# refetch current version
 CURRENT_VERSION=$(cat version)
 
 # clean up previous / unused build version

@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".build-d1e049e/types/**/*.ts"
+    ".build-d1e049e/types/**/*.ts",
+    ".build-e231934/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
